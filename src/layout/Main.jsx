@@ -4,7 +4,7 @@ import { Preloader } from '../components/Preloader';
 import { Search } from '../components/Search';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const url = 'http://www.omdbapi.com/';
+const url = 'https://www.omdbapi.com/';
 
 class Main extends React.Component {
     state = {
@@ -17,7 +17,11 @@ class Main extends React.Component {
             .then((res) => res.json())
             .then((data) =>
                 this.setState({ movies: data.Search, loading: false })
-            );
+            )
+            .catch((err) => {
+                console.log(err);
+                this.setState({ loading: false });
+            });
     }
 
     searchMovies = (str, type = 'all') => {
@@ -30,7 +34,11 @@ class Main extends React.Component {
             .then((res) => res.json())
             .then((data) =>
                 this.setState({ movies: data.Search, loading: false })
-            );
+            )
+            .catch((err) => {
+                console.log(err);
+                this.setState({ loading: false });
+            });
     };
 
     render() {
